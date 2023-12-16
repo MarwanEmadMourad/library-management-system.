@@ -10,7 +10,7 @@ const router = new express.Router();
 router.post("/Book", async (req, res) => {
     const newBook = req.body;
     try {
-        const bookExist = await Book.findOne({ where:{ title: req.body.title } })
+        const bookExist = await Book.findOne({ where:{ title: newBook.title } })
         if (bookExist) {
             throw new Error("Book is already registered.");
         } else {
@@ -52,16 +52,15 @@ router.delete("/Book", async (req, res) => {
     const bookId = req.body.id;
     try {
         const deleted = await Book.destroy({ where: { id: bookId } })
-        console.log(deleted)
-            if(deleted){
-                res.status(200).send({
-                    message:"Book deleted successfuly"
-                });
-            } else {
-                res.status(404).send({
-                    message:"No books found to delete."
-                });
-            }
+        if(deleted){
+            res.status(200).send({
+                message:"Book deleted successfuly"
+            });
+        } else {
+            res.status(404).send({
+                message:"No books found to delete."
+            });
+        }
     } catch (error) {
         res.status(400).send({
             message: error.message
