@@ -15,6 +15,7 @@ BookBorrower.sync();
 // requiring REST routes
 const BookRouter = require("./controller/routes/book");
 const BorrowerRouter = require("./controller/routes/borrower");
+const BorrowingProcess = require("./controller/routes/borrowingProcess");
 
 // accepting JSON in request/response 
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use(express.json());
 // using the created routes
 app.use(BookRouter);
 app.use(BorrowerRouter);
+app.use(BorrowingProcess);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

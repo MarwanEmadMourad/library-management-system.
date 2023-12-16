@@ -71,7 +71,7 @@ router.delete("/Book", async (req, res) => {
 // getting all books
 router.get("/Books", async (req, res) => {
     try {
-        const books = await Book.findAll({attributes: ['id', 'title','author']});
+        const books = await Book.findAll({attributes: ['id', 'title','author','availableQty']});
         if(books.length) {
             res.status(200).send({
                 books:books
